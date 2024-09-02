@@ -1,0 +1,32 @@
+
+<ion-content>
+  <ion-header>
+    <div class="header-regis">
+      <!-- 233 -->
+      <div class="backbtn" (click)="backtologin()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </div>
+      <div class="title">
+        <h1>ĐĂNG KÝ TÀI KHOẢN</h1>
+      </div>
+    </div>
+  
+  
+  </ion-header>
+  <div class="regisform">
+    <form action="">
+      <ion-input type="text" placeholder="Email"></ion-input>
+      <ion-input type="text" placeholder="Tên người dùng"></ion-input>
+      <ion-input type="text" placeholder="Tên đầy đủ"></ion-input>
+  
+        <ion-input placeholder="Mật khẩu">
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+        <ion-input  placeholder="Nhập lại mật khẩu">
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+      <input class="btnregis" type="submit" value="ĐĂNG KÝ">
+  </form>
+  </div>
+</ion-content>
+

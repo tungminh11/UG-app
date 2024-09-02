@@ -1,0 +1,87 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    
+}
+ion-header{
+    width: 100%;
+    background-color: rgb(227, 227, 227);
+    .header-regis{
+        padding: 10% 5% 0 5%;
+        width: 100%;
+        height: 100%;
+        max-height: 233px;
+        background-color: #d33333;
+        border-radius: 0 0 10px 10px;
+        .backbtn{
+            ion-icon{
+                color: #fff;
+                font-size: 50px;
+                cursor: pointer;
+            }
+        }
+        .title{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            h1{
+                font-size: 50px;
+                color: #fff;
+                font-weight: 700;
+                height: auto;
+
+                text-shadow: 0px 2px 2px rgba(255, 255, 255, 0.4);
+            }
+        }
+    }
+    
+}
+.regisform{
+    background-color: #e6e1e1;
+    padding: 20% 20px;
+    width: 100%;
+    form{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        .pass{
+            display: flex;
+            ion-icon{
+                display: inline;
+                margin-left: -10.5%;
+                vertical-align: middle;
+                justify-content: space-between;
+                display: flex;
+                padding: 20px 0 0 0;
+                font-size: 20px;
+            }
+        }
+        ion-input{
+            width: 100%;
+            margin-bottom: 10%;
+            border-radius: 25px;
+            border: none;
+            background-color: #fff;
+            padding: 5px 5px 5px 10px !important;
+            ion-input-password-toggle{
+                color: #e6e1e1 !important;
+            }
+
+        }
+        .btnregis{
+            background-color: #d33333;
+            padding:  15px 0;
+            margin: 0;
+            color: #Fff;
+            font-size: 20px;
+            font-weight: 700;
+            border: none;
+            border-radius: 25px;
+        }
+    }
+}
+.button-inner{
+    color:#e6e1e1 !important;
+}

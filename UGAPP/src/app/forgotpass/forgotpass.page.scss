@@ -1,0 +1,96 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    
+}
+ion-header{
+    width: 100%;
+    background-color: rgb(227, 227, 227);
+    height: 100%;
+    .header-forgot{
+        padding: 10% 5% 0 5%;
+        width: 100%;
+        height: 100%;
+        max-height: 233px;
+        background-color: #d33333;
+        border-radius: 0 0 10px 10px;
+        .backbtn{
+            ion-icon{
+                color: #fff;
+                font-size: 50px;
+                cursor: pointer;
+            }
+        }
+        .title{
+            display: flex;
+            justify-content: flex-start;
+            height: 100%;
+            h1{
+                font-size: 50px;
+                color: #fff;
+                font-weight: 700;
+                height: auto;
+
+                text-shadow: 0px 2px 2px rgba(255, 255, 255, 0.4);
+            }
+        }
+    }
+    
+}
+.child-forgot{
+    padding: 10% 0;
+    width: 100%;
+    background-color: #e6e1e1;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    .img-pass{
+        img{
+            width: 100px;
+            height: auto;
+        }
+    }
+    .content{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        p{
+            font-size: 20px;
+            padding: 8px 0;
+        }
+        .text-d{
+            font-size: 15px;
+            width: 63%;
+            text-align: center;
+            color: black;
+            padding: 12px 0;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            input{
+                width: 90%;
+                border: none;
+                padding: 15px 10px 15px 10px !important;
+                border-radius: 25px;
+                margin-bottom: 10%;
+                
+            }
+            ion-button{
+                width: 90%;
+                background-color: #d33333;
+                color: #fff;
+                font-size: 16px;
+                border-radius: 20px;
+            }
+
+        }
+    }
+}

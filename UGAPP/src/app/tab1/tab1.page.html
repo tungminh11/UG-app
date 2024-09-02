@@ -1,0 +1,34 @@
+<div id="content">
+    <div class="header">
+        <div class="title">
+            <div class="sub-title">
+                <img class="logo" src="../../assets/logo/logoapp.png" alt="">
+                <div class="content">
+                    <h1>URGENT ASSIST</h1>
+                    <p>URGENT ASSIST</p>                
+                </div>
+            </div>
+
+                <img src="../../assets/img/avartar.png" alt="">
+        </div>
+    </div>
+    <div class="content-main">
+        <button  type="submit">SOS</button>
+        <p>Hãy nhấp vào nút này khi bạn cần sự trợ giúp khẩn cấp</p>
+    </div>
+    <div class="border-pad">
+        <div></div>
+    </div>
+    <div class="WARNING-Natural-Disaster">
+        <h1 >Cảnh báo thiên tai</h1>
+        <p *ngFor="let item of dataget" >{{item.text}}</p>
+    </div>
+    <div class="border-pad">
+        <div></div>
+    </div>
+    <div class="WARNING-Natural-Disaster">
+        <h1 >Cảnh báo dịch bệnh</h1>
+        <p *ngFor="let item of dataget" >{{item.text}}</p>
+    </div>
+
+</div>

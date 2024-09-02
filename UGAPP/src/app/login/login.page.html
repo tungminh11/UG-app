@@ -1,0 +1,29 @@
+<ion-header>
+  <div class="header">
+    <div class='title'>
+      <img src="../../assets/logo/logoapp.png" alt="">
+      <h1>URGENT ASSIST</h1>
+    </div>
+    <div id="loginform">
+      <form action=""[formGroup]="formInfo">
+        <ion-input type="text" placeholder="số điện thoại" formControlName="phone">
+        </ion-input>
+        <ion-input type="text" placeholder="Mật khẩu" formControlName="password">
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+
+        </ion-input>
+        <div class="forgot">
+          <label class="container">Ghi nhớ
+            <input type="checkbox" checked="checked">
+            <span class="checkmark"></span>
+          </label>
+          <a (click)="toforgotPass()">Quên mật khẩu?</a>
+        </div>
+        <button type="submit" (click)="checkinf()">ĐĂNG NHẬP</button>
+        <p>Bạn không có tài khoản? <a  routerLink="/register">Hãy tạo tài khoản</a></p>
+
+      </form>
+    </div>
+  </div>
+</ion-header>
+
