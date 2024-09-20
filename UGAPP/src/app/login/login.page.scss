@@ -9,6 +9,7 @@ ion-header{
   height: 100vh;
   background-color: #d33333;
   position: absolute;
+  overflow-y: auto;
   .header{
     display: flex;
     align-items: center;

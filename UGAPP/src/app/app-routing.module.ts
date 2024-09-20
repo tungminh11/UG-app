@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'forgotpass',
     loadChildren: () => import('./forgotpass/forgotpass.module').then( m => m.ForgotpassPageModule)
+  },
+  {
+    path: 'tab4',
+    loadChildren: () => import('./tab4/tab4.module').then( m => m.Tab4PageModule)
   }
 ];
 @NgModule({

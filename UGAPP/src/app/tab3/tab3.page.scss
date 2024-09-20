@@ -1,0 +1,31 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+#text{
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    .title{
+        max-height: 100px;
+        background-color: #d33333;
+        border-radius: 0 0 10px 10px;
+        h1{
+            padding:  0 0 0 10px;
+        font-size: 40px;
+        color: #fff;
+
+        }
+    }
+    .content{
+        padding: 10px;
+        ion-card{
+            padding: 10px;
+            margin: 10px;
+        }
+
+    }
+
+}

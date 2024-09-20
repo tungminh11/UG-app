@@ -1,34 +1,117 @@
 <div id="content">
-    <div class="header">
-        <div class="title">
-            <div class="sub-title">
-                <img class="logo" src="../../assets/logo/logoapp.png" alt="">
-                <div class="content">
-                    <h1>URGENT ASSIST</h1>
-                    <p>URGENT ASSIST</p>                
-                </div>
+  <div class="header">
+    <div class="title">
+      <div class="sub-title">
+        <ion-icon name="location"></ion-icon>
+        <p>Vị trí của bạn: {{placesnow}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="content-main">
+    <div class="btn-SOS" (click)="ShowSOS()">
+      <p class="SOS">SOS</p>
+      <div class="circle">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+
+    <p class="sub-title">Hãy nhấp vào nút này khi bạn cần sự trợ giúp khẩn cấp</p>
+  </div>
+  <div class="WARNING-Natural-Disaster">
+    <div class="content">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Cảnh Báo Thời Tiết</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div class="country">
+            <p class="mainct">
+              Tên Khu Vực: <b style="color: black">{{namecountry}}</b>
+            </p>
+          </div>
+          <div class="content-child">
+            <p>
+              Thời tiết Hôm nay: <b style="color: black">{{description}}</b>
+            </p>
+            <div class="temp">
+              <p>Nhiệt độ: <b style="color: black">{{temp}}°C</b></p>
+              <p>Độ ẩm: <b style="color: black">{{humidity}}pH</b></p>
             </div>
 
-                <img src="../../assets/img/avartar.png" alt="">
-        </div>
+            <p>Mực nước biển: <b style="color: black">{{sea_level}}m</b></p>
+          </div>
+        </ion-card-content>
+      </ion-card>
     </div>
-    <div class="content-main">
-        <button  type="submit">SOS</button>
-        <p>Hãy nhấp vào nút này khi bạn cần sự trợ giúp khẩn cấp</p>
-    </div>
-    <div class="border-pad">
-        <div></div>
-    </div>
-    <div class="WARNING-Natural-Disaster">
-        <h1 >Cảnh báo thiên tai</h1>
-        <p *ngFor="let item of dataget" >{{item.text}}</p>
-    </div>
-    <div class="border-pad">
-        <div></div>
-    </div>
-    <div class="WARNING-Natural-Disaster">
-        <h1 >Cảnh báo dịch bệnh</h1>
-        <p *ngFor="let item of dataget" >{{item.text}}</p>
-    </div>
+  </div>
+  <div class="WARNING-Natural-Disaster">
+    <div class="content">
+      <ion-card id="color-wn">
+        <ion-card-header>
+          <ion-card-title>Cảnh Báo Thiên Tai</ion-card-title>
+        </ion-card-header>
 
+        <ion-card-content>
+            <div class="color-warning">
+                <div  style="width:150px;height:150px;"></div>
+            </div>
+            <div class="attention">
+                <div class="alert-wn">
+                    <div style="width:10px;height:10px;background-color:rgb(255, 255, 255);"></div>
+                    <p class="text-color" >Bình thường</p>
+                </div>
+                <div class="alert-wn">
+                    <div style="width:10px;height:10px;background-color:rgb(225, 255, 0);"></div>
+                    <p class="text-color">Khá Nguy Hiểm</p>
+                </div>
+                <div class="alert-wn">
+                    <div style="width:10px;height:10px;background-color:rgb(255, 0, 0);"></div>
+                    <p class="text-color">Nguy hiểm</p>
+                </div>
+                <div class="alert-wn">
+                    <div style="width:10px;height:10px;background-color:rgb(162, 0, 255);"></div>
+                    <p class="text-color">Thiên Tai</p>
+                </div>
+
+
+                </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <div class="WARNING-Natural-Disaster">
+    <div class="content">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Cảnh Báo Dịch Bệnh</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div class="country">
+            <p class="mainct">
+              Tên Khu Vực: <b style="color: black">{{namecountry}}</b>
+            </p>
+          </div>
+          <div class="content-child">
+            <p>
+              Thời tiết Hôm nay: <b style="color: black">{{description}}</b>
+            </p>
+            <div class="temp">
+              <p>Nhiệt độ: <b style="color: black">{{temp}}°C</b></p>
+              <p>Độ ẩm: <b style="color: black">{{humidity}}pH</b></p>
+            </div>
+
+            <p>Mực nước biển: <b style="color: black">{{sea_level}}m</b></p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+ 
 </div>

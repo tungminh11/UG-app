@@ -1,0 +1,72 @@
+<ion-header>
+  <div class="header">
+
+    
+    <div class="user">
+      <ion-avatar>
+        <img class="avt-user" alt="Silhouette of a person's head" src="https://i.kinja-img.com/gawker-media/image/upload/c_fill,f_auto,fl_progressive,g_center,h_675,pg_1,q_80,w_1200/ijsi5fzb1nbkbhxa2gc1.png" />
+      </ion-avatar>
+    </div>
+  </div>
+
+  <ion-content>
+    <div id="main">
+      <div class="tag-name">
+        <ion-button shape="round" size="small"  fill="clear">
+          <p>#</p>
+        </ion-button>
+      </div>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title *ngFor="let inf of dataused">
+            <p>{{dataused.username}}</p>
+            <ion-icon name="chevron-down-outline"></ion-icon>
+          </ion-card-title>
+
+        </ion-card-header>
+        <ion-card-subtitle>minhtungg</ion-card-subtitle>
+
+      
+        <ion-card-content>
+          <ion-button shape="round">
+            <ion-icon name="chatbubble"></ion-icon>
+            <p>Them trang t...</p>
+          </ion-button>
+          <ion-button shape="round">
+            <ion-icon name="pencil"></ion-icon>
+            <p>Sua Ho So</p>
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+      <ion-card class="day-of-in">
+        <ion-card-header>
+          <ion-card-content>Gia Nhập Discord Từ</ion-card-content>
+
+        </ion-card-header>
+      
+        <ion-card-content>
+         23 thg 2,2023
+        </ion-card-content>
+      </ion-card>
+      <ion-card class="friends ">
+        <ion-card-header >
+          <ion-card-content>Bạn bè
+
+          </ion-card-content>
+
+
+        </ion-card-header>
+        <ion-avatar>
+          <img src="https://static.toiimg.com/thumb/resizemode-4,msid-76729536,imgsize-249247,width-800/76729536.jpg" alt="">
+        </ion-avatar>
+        <ion-icon name="chevron-forward"></ion-icon>
+
+      
+
+      </ion-card>
+
+    </div>
+  </ion-content>
+  
+</ion-header>
+

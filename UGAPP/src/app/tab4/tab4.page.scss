@@ -1,0 +1,137 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;    
+}
+ion-header{
+    background-color: #d33333;
+    height: 100vh;
+    .header{
+        height: 150px;
+    }
+    .icon-setting{
+    display: flex;
+    justify-content: flex-end;
+
+        padding: 10px 10px 0 0;
+        .market{
+            padding: 0 10px 0 0;
+
+        }
+        .nitro{
+            padding: 0 10px 0 0;
+
+
+        }
+        .setting{
+            background-color:  #292A31;
+            border-radius: 30px;
+            width: 30px;
+
+            ion-icon{
+                color: #fff;
+            }
+        }
+    }
+    .user{
+        width: 100%;
+        position: fixed;
+        padding: 100px 0 0 20px;
+        ion-avatar{
+            width: 100%;
+            padding: 0 0 0 20px;
+            .avt-user{
+                border: #e6e1e1 solid 7px;
+                width: 100px;
+                height: 100px;
+            }
+        }
+    }
+}
+ion-content{
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: -1;
+    #main{
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        padding: 20px 15px 0 15px;
+        .tag-name{
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 0 20px 0;
+            ion-button{
+                display: flex;
+                justify-content: center;
+                background-color: #26272F;
+                border-radius: 12px;
+                width: 30px;
+                
+                p{
+                    background-color: #1ABB9B;
+                    font-size: 12px;
+                    padding: 4px;
+                    border-radius: 20px;
+                    color: black;
+                    font-weight: 900;
+
+                }
+            }
+        }
+        ion-card{
+            padding: 20px;
+            margin: 0 0 20px 0;
+            ion-card-title{
+                padding: 0 0 10px 0;
+                ion-icon{
+                    font-size: 17px;
+                    cursor: pointer;
+                }
+            }
+            ion-card-subtitle{
+                padding: 0 0 10px 0 ;
+            }
+            ion-card-content{
+                display: flex;
+                justify-content: space-between;
+                ion-button{
+                    width: 166px;
+                    p{
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+
+    }
+}
+
+.day-of-in{
+    ion-card-header{
+        padding: 0 0 7px 0;
+        ion-card-content{
+            font-size: 17px;
+        }
+    }
+
+}
+.friends{
+    display: flex;
+    justify-content: center;
+    ion-card-header{
+        width: 90%;
+        display: flex;
+        justify-content: center;
+
+    
+    }
+    ion-icon{
+        display: flex;
+        justify-content: center;
+
+    }
+
+}

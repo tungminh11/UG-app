@@ -6,10 +6,11 @@
 #content{
     width: 100%;
     height: 100%;
-    background-color: #e6e1e1;
+    background-color: #fff;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
     .header{
         padding: 10px;
         .title{
@@ -17,16 +18,22 @@
             justify-content: space-between;
             .sub-title{
                 display: flex;
-                font-size: 10px;
+                font-size: 17px;
                 color: #ef4136;
-                h1{
-                    font-size: 15px;
+                align-items: center;
+                
+                p{
+                    font-size: 17px;
                     color: #545454;
                     font-weight: 700;
+                    padding: 0 0 0 20px;
+                    
 
                 }
-                .logo{
-                    max-height: 40px;
+                ion-icon{
+                    width: 28px;
+                    height: 25px;
+
                 }
             }
 
@@ -52,9 +59,10 @@
                 margin: 0 0 10px 0;
                 
         }
-        p{
+        .sub-title{
             font-size: 19px;
             text-align: center;
+            padding: 20px 0 0 0;
         }
         button:active{
             opacity: 0.9;
@@ -70,17 +78,115 @@
             height: 3px;
         }
     }
-    .WARNING-Natural-Disaster{
-        h1{
-            font-weight: 700;
-            font-size: 30px;
+    .WARNING-Natural-Disaster {
+        .content{
+            padding: 15px;
+            ion-card{
+                padding:10px;
+                background-color: rgb(245, 245, 245);
+            }
+            ion-card-header{
+                text-align: center;
+            }
+            .country{
 
+                width: 100%;
+                .mainct{
+                    width: 100%;
+                    font-size: 25px;
+
+                }
+    
+            }
+            .content-child{
+                font-size: 15px;
+                p{
+                    font-size: 15px;
+                    padding-bottom:6px ;
+                }
+
+            }  
         }
-        h1,p{
-            text-align: center;
-            padding: 0 0 10px 0 ;
-        }
+ 
 
     }
 }
+.circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(#33CCFF, #FF0066);
+    border-radius: 50%;
+    animation: animate 0.5s linear infinite;
+}
+.btn-SOS{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .SOS{
+        position: absolute;
+        z-index: 10;
+        color: white;
+        font-size: 30px;
+        font-weight: 700;
+    }
+}
+@keyframes animate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
 
+.circle::after {
+    content: '';
+    position: absolute;
+    top: 35px;
+    right: 35px;
+    bottom: 35px;
+    left: 35px;
+    border-radius: 50%;
+    background-color: rgb(255, 50, 50);
+    border: 2px solid ghostwhite;
+}
+.circle span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#ef4136, rgb(244, 69, 99));
+    border-radius: 50%;
+    filter: blur(5px);
+}
+.circle span:nth-child(1) {
+    filter: blur(5px);
+}
+.circle span:nth-child(2) {
+    filter: blur(10px);
+}
+.circle span:nth-child(3) {
+    filter: blur(20px);
+}
+.circle span:nth-child(4) {
+    filter: blur(55px);
+}
+.color-warning{
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 15px 0;
+}
+.attention{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .alert-wn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        div{
+            padding: 0 10px 0 0 ;
+        }
+    }
+}
