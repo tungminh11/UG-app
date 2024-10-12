@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -7,7 +7,9 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  constructor(
+    public router: Router
+  ) {}
   datainfo:any= [
     {
       "adress": "https://dantri.com.vn/suc-khoe/lan-song-covid-19-moi-tang-nhanh-tren-toan-cau-dich-tai-viet-nam-ra-sao-20240122114510596.htm",
@@ -36,5 +38,8 @@ export class Tab3Page {
     },
 
   ]
+  gotodetail(){
+    this.router.navigate(['/tabs/tab3/detail'])
+  }
 
 }

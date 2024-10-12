@@ -2,13 +2,16 @@ import { Component } from '@angular/core';
 import { WeatherService } from '../@app-core/http/weather api';
 import { GoongService } from '../@app-core/http/goong'; 
 import { Geolocation } from '@capacitor/geolocation';
-
+import { Router } from '@angular/router';
+import { NavigationExtras } from '@angular/router';
+import { LoadingService } from '../@app-core/http/loading';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+public placesid:string | undefined;
 latnew:any;
 lngnew:any;
 mainweather:any;
@@ -22,12 +25,17 @@ sea_level:any;
 apikey = "moh7iGN6X9muXFV9wcXkwFSi5xj7CeSJYzwBM98Q";
 placesnow:any;
 checkData:any = false;
+currentps:any;
   constructor(
+    public loading: LoadingService,
     private weather:WeatherService,
-    private goong:GoongService
+    private goong:GoongService,
+    private router:Router,
   ) {}
+
   ngOnInit(){
-    
+    this.loading.presentLoading()
+  
     const currentposition = async ()=>{
       const coordinates = await Geolocation.getCurrentPosition();
       
@@ -36,9 +44,11 @@ checkData:any = false;
       this.goong.getcurrentposition(this.apikey,this.latnew,this.lngnew).subscribe({
         next:(res)=>{
           console.log(res);
+          this.currentps = res;
           this.placesnow = res.results[0].formatted_address;
           console.log(this.placesnow);
-          
+          this.checkData = true;
+          this.funcCheckdata()
                 
         },
         error:(err)=>{
@@ -52,10 +62,10 @@ checkData:any = false;
   ionViewDidEnter(){
     
 
-  
-    this.weather.getWeather(22.7728753,104.9166406).subscribe({
+    this.weather.getWeather(this.latnew,this.lngnew).subscribe({
       next: (data) => {
         console.log(data);
+        
         this.temp = data.main.temp;
         this.humidity = data.main.humidity;
         this.sea_level = data.main.sea_level;
@@ -64,13 +74,18 @@ checkData:any = false;
         this.description = data.weather[0].description;
         this.country = data.sys.country;
         this.namecountry = data.name;
+        this.checkData = true;
+        this.funcCheckdata()
+        
 
       },
       error: (err)=>{
+        this.loading.presentLoading()
         console.log(err);
       }
     })
-    const blockdisplay:any  = document.getElementById("color-wn") as HTMLDivElement;
+
+    const blockdisplay:any  = <HTMLDivElement>document.getElementById("color-wn") as HTMLDivElement;
     const text:any = document.querySelectorAll("text-color");
     blockdisplay.style.backgroundColor = "rgb(162, 0, 255)"
     if(blockdisplay.style.backgroundColor == "rgb(225, 255, 0)"){
@@ -99,27 +114,43 @@ checkData:any = false;
     }
   
   }
-  datafake:any = [
-    {
-      text:"text1"
-    },
-    {
-      text:"akjfbasiaksdsa"
-    },
-    {
-      text:"akjfbasiaksdsa"
-    },
-    {
-      text:"akjfbasiaksdsa"
-    },
-    {
-      text:"akjfbasiaksdsa"
+  funcCheckdata(){
+    if(this.checkData == true){
+      this.loading.dismiss();
     }
+    else{
+      this.loading.presentLoading();
+    }
+  }
+  // datafake:any = [
+  //   {
+  //     text:"text1"
+  //   },
+  //   {
+  //     text:"akjfbasiaksdsa"
+  //   },
+  //   {
+  //     text:"akjfbasiaksdsa"
+  //   },
+  //   {
+  //     text:"akjfbasiaksdsa"
+  //   },
+  //   {
+  //     text:"akjfbasiaksdsa"
+  //   }
 
-  ]
-  dataget:any= this.datafake.slice(0,3);
+  // ]
+  // dataget:any= this.datafake.slice(0,3);
   ShowSOS(){
-    console.log("vao");
+
+    console.log(this.currentps.results[0].place_id);
+    const queryParams:any  ={}
+    const datapush = this.currentps.results[0].place_id
+    queryParams.data = JSON.stringify(datapush);
+    const navigationExtras:NavigationExtras = {
+      queryParams
+    };
+    this.router.navigate(['/tabs/tab2'], navigationExtras)
     
   }
 

@@ -10,23 +10,79 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     background-color: white;
-
+    .items{
+      display: flex;
+      align-items: center;
+      padding: 15px 0 ;
+      ion-icon{
+        width: 40px;
+        height: 40px;
+      }
+    }
     h1{
         width: 100%;
-        font-size: 15px;
+        font-size: 20px;
         color: black;
         padding: 8px;
-        border-bottom: 1px solid black;
         border-bottom-width: 100%;
     }
 
 }
 .searchmain{
-    position:absolute ;
     z-index: 1000;
     width: 100%;
+    .on-map.map-bubble{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .search-native{
+          width: calc(90% + 16px);
+          .search-bar{
+              --border-radius: 50px;
+              --background: var(--ion-background-color)
+          }
+      }
+      .result-block{
+          width: 90%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          border-radius: 25px;
+          overflow: hidden;
+          .results-items {
+              background-color: var(--ion-background-color);
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+              width: 100%;
+              .locate-icon {
+                  font-size: 25px;
+                  padding: 12px;
+              }
+          
+              .results {
+                  margin: 0;
+                  font-size: 18px;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  padding: 14px 4px;
+                  width: 75%;
+              }
+          }
+      }
+      .marked-container{
+          width: 85%;
+          background-color: var(--ion-background-color);
+          margin: 12px 0;
+          border-radius: 50px;
+          padding: 4px 20px;
+          .marked-name{
+              text-align: center;
+          }
+      }
+  }
 }
 #main{
     background-color: #e6e1e1;
@@ -37,8 +93,9 @@
     display: flex;
     justify-content: center;
     height: auto;
+    margin:15px 0 0  0;
     .search {
-        width: 100%;
+        width: 92%;
         display: flex;
         align-items: center;
         justify-content: space-between;

@@ -7,6 +7,7 @@ import { LoadingService } from '../@app-core/http/loading';
 import { GoongService } from '../@app-core/http/goong';
 import {NgZone } from '@angular/core'
 import { map } from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
 declare var google: any;
 @Component({
   selector: 'app-tab2',
@@ -29,7 +30,8 @@ export class Tab2Page {
     private loading: LoadingService,
     private loadingCtrl: LoadingController,
     private goong: GoongService,
-    private zone: NgZone
+    private zone: NgZone,
+    private route: ActivatedRoute, private router: Router
 
 
   ) {}
@@ -70,12 +72,21 @@ export class Tab2Page {
   //       this.map.setCenter(latLng);
   //       this.loading.dismiss()
   // }
-  multilat:any = [12.453256790793843,12.442499346542574,12.440944018949855 ];
-  multilng:any = [107.62413369118283,107.63165493726254,107.62342580933753];
+  searchcontent:any;
+  placess:any;
+  newdata:any;
+  dataused:any;
+  latmarker:any;
+  lngmarker:any;
+  multilat:any = ["this.latmarker"];
+  multilng:any = ["this.lngmarker"];
   async listenEvent(res:any){
+
+    this.searchcontent = res.detail.value;
     this.goong.getplaces(this.apikey,res.detail.value).subscribe({
       next: (data:any) => {
-        this.places = data.predictions;   
+        this.places = data.predictions; 
+        this.placess = data;
       },
       error: (err:any) => {
       }
@@ -89,10 +100,40 @@ export class Tab2Page {
         this.loading.dismiss()
       },500
     )
+    const dataget = this.route.snapshot.queryParamMap.get('data');
+    if(dataget === null){
+      this.newdata = "No Data";
+    }
+    else{
+      this.newdata = dataget;
+      console.log(this.newdata);
+      this.dataused = JSON.parse(this.newdata)
+      console.log(this.dataused);
+      
+      this.goong.getlatlngbyid(this.apikeymap,this.dataused).subscribe({
+        next: (data:any) => {
+          console.log(data);
+          console.log(data.result.geometry.location.lat);
+          console.log(data.result.geometry.location.lng);
+          this.latmarker = data.result.geometry.location.lat;
+          this.lngmarker = data.result.geometry.location.lng;
 
+          
+          
+        },
+        error: (err:any) => {
+          console.log(err);
+        }
+      })
+      
+      
+    }
   }
   
+  
   place:any;
+  searchitems:any;
+
   loadMap(lat:any,lng:any){  
 
     const latLng = new google.maps.LatLng(this.lat,this.lng);
@@ -115,7 +156,8 @@ export class Tab2Page {
       },
       map: this.map,
       draggable: true,
-      title:"Vị trí của bạn"
+      title:"Vị trí của bạn",
+      
     })
     for(let i=0;i<this.multilat.length;i++){
       const latLng = new google.maps.LatLng(this.multilat[i],this.multilng[i]);
@@ -123,6 +165,7 @@ export class Tab2Page {
         position: latLng,
         map: this.map,
         draggable: false,
+        
 
       })
     }
@@ -134,6 +177,11 @@ export class Tab2Page {
       this.goong.getcurrentposition(center.lat(), center.lng(),this.apikey).subscribe(
         {
           next: (data: any) => {
+            const searcthtml = <HTMLFormElement>document.getElementById('ionsearchbar');
+            searcthtml.nodeValue= "";
+            searcthtml.setAttribute('value',"");
+            searcthtml.setAttribute('ng-reflect-model', '');
+
             console.log('abc',data);
             setTimeout(() => {
               this.zone.run(() => {
@@ -161,6 +209,7 @@ export class Tab2Page {
           console.log(this.latdata,this.lngdata);
         this.loadMap(response.result.geometry.location.lat, response.result.geometry.location.lng)
       },
+      
       error:(error:any)=>{
         console.log(error);
 

@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
     },
     {
       phone:"091234797",
-      password:"12345",
+      password:"-",
       info:[
         {
           name:"tm2",
