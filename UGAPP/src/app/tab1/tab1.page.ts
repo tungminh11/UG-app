@@ -33,9 +33,7 @@ currentps:any;
     private router:Router,
   ) {}
 
-  ngOnInit(){
-    this.loading.presentLoading()
-  
+  ngOnInit(){  
     const currentposition = async ()=>{
       const coordinates = await Geolocation.getCurrentPosition();
       
@@ -60,7 +58,7 @@ currentps:any;
 
   }
   ionViewDidEnter(){
-    
+    this.loading.presentLoading()
 
     this.weather.getWeather(this.latnew,this.lngnew).subscribe({
       next: (data) => {
@@ -74,13 +72,10 @@ currentps:any;
         this.description = data.weather[0].description;
         this.country = data.sys.country;
         this.namecountry = data.name;
-        this.checkData = true;
-        this.funcCheckdata()
-        
+        this.loading.dismiss()        
 
       },
       error: (err)=>{
-        this.loading.presentLoading()
         console.log(err);
       }
     })
@@ -142,15 +137,18 @@ currentps:any;
   // ]
   // dataget:any= this.datafake.slice(0,3);
   ShowSOS(){
-
-    console.log(this.currentps.results[0].place_id);
+    const dataLatLng = {
+      lat:this.currentps.results[0].geometry.location.lat,
+      lng:this.currentps.results[0].geometry.location.lng
+    }
     const queryParams:any  ={}
-    const datapush = this.currentps.results[0].place_id
-    queryParams.data = JSON.stringify(datapush);
-    const navigationExtras:NavigationExtras = {
-      queryParams
-    };
-    this.router.navigate(['/tabs/tab2'], navigationExtras)
+    // const datapush = this.currentps.results[0].place_id
+    queryParams.data = JSON.stringify(dataLatLng);
+    this.router.navigate(['/tabs/tab2'],{
+      queryParams:{
+        data: JSON.stringify(dataLatLng)
+      }
+    })
     
   }
 

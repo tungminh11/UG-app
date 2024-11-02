@@ -11,11 +11,6 @@
 
   <ion-content>
     <div id="main">
-      <div class="tag-name">
-        <ion-button shape="round" size="small"  fill="clear">
-          <p>#</p>
-        </ion-button>
-      </div>
       <ion-card>
         <ion-card-header>
           <ion-card-title *ngFor="let inf of dataused">
@@ -28,14 +23,16 @@
 
       
         <ion-card-content>
-          <ion-button shape="round">
+          
+          <ion-button (click)="move_add_member()" shape="round">
             <ion-icon name="chatbubble"></ion-icon>
-            <p>Them trang t...</p>
+            <p>Thêm Thành Viên</p>
           </ion-button>
           <ion-button shape="round">
             <ion-icon name="pencil"></ion-icon>
-            <p>Sua Ho So</p>
+            <p>Sửa Hồ Sơ</p>
           </ion-button>
+          
         </ion-card-content>
       </ion-card>
       <ion-card class="day-of-in">
@@ -50,7 +47,7 @@
       </ion-card>
       <ion-card class="friends ">
         <ion-card-header >
-          <ion-card-content>Bạn bè
+          <ion-card-content>Thành Viên
 
           </ion-card-content>
 

@@ -4,6 +4,8 @@ import { AuthserviceService } from './http/auth';
 import { LoadingService } from './http/loading';
 import { GoongService } from './http/goong';
 import { WeatherService } from './http/weather api';
+import { RegisterService } from './http/register';
+import { AuthenticationService } from './http/authenservice';
 @NgModule({
   declarations: [],
   imports: [
@@ -11,7 +13,9 @@ import { WeatherService } from './http/weather api';
     AuthserviceService,
     LoadingService,
     GoongService,
-    WeatherService
+    WeatherService,
+    RegisterService,
+    AuthenticationService
   ]
 })
 export class CoreModule { }

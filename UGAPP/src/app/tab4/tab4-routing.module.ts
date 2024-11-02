@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: Tab4Page
+  },  {
+    path: 'add-member',
+    loadChildren: () => import('./add-member/add-member.module').then( m => m.AddMemberPageModule)
   }
+
 ];
 
 @NgModule({

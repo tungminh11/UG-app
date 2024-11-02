@@ -14,18 +14,17 @@
   
   </ion-header>
   <div class="regisform">
-    <form action="">
-      <ion-input type="text" placeholder="Email"></ion-input>
-      <ion-input type="text" placeholder="Tên người dùng"></ion-input>
-      <ion-input type="text" placeholder="Tên đầy đủ"></ion-input>
+    <form action="" [formGroup]="forminfo">
+      <ion-input type="text" formControlName="phone" placeholder="Số điện thoại"></ion-input>
+      <ion-input type="text" formControlName="full_name" placeholder="Tên đầy đủ"></ion-input>
   
-        <ion-input placeholder="Mật khẩu">
+        <ion-input placeholder="Mật khẩu" formControlName="password">
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         </ion-input>
-        <ion-input  placeholder="Nhập lại mật khẩu">
+        <ion-input id="confirmpass"  placeholder="Nhập lại mật khẩu">
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         </ion-input>
-      <input class="btnregis" type="submit" value="ĐĂNG KÝ">
+      <input class="btnregis" (click)="regis()" type="submit" value="ĐĂNG KÝ">
   </form>
   </div>
 </ion-content>

@@ -16,9 +16,9 @@
       <div class="content">
         <p>Bạn đang gặp sự cố khi đăng nhập</p>
         <p class="text-d">Hãy nhập số điện thoại,chúng tôi sẽ gửi link để reset mật khẩu cho bạn</p>
-        <form action="">
-          <input  type="text" placeholder="Số điện thoại">
-          <ion-button fill="clear">Đặt lại mật khẩu</ion-button>
+        <form action="" [formGroup]="forminfo">
+          <ion-input formControlName="phone"  type="text" placeholder="Số điện thoại"></ion-input>
+          <ion-button (click)="resetpass()" fill="clear">Đặt lại mật khẩu</ion-button>
         </form>
       </div>
     </div>

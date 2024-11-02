@@ -1,7 +1,7 @@
 
 import { LocalizedString } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { Geolocation } from '@capacitor/geolocation';
+import { Geolocation, GeolocationPluginPermissions } from '@capacitor/geolocation';
 import { LoadingController } from '@ionic/angular';
 import { LoadingService } from '../@app-core/http/loading';
 import { GoongService } from '../@app-core/http/goong';
@@ -15,6 +15,12 @@ declare var google: any;
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  searchcontent:any;
+  placess:any;
+  newdata:any;
+  dataused:any;
+  latmarker:any;
+  lngmarker:any;
   map:any;
   lat:any;
   lng:any;
@@ -26,6 +32,9 @@ export class Tab2Page {
     lat:0,
     lng:0
   }
+  multilat:any;
+  multilng:any;
+  placesnow:any;
   constructor(
     private loading: LoadingService,
     private loadingCtrl: LoadingController,
@@ -36,18 +45,19 @@ export class Tab2Page {
 
   ) {}
   ngOnInit(){
-    this.loading.presentLoading()
     
     const printCurrentPosition = async () => {
       const coordinates = await Geolocation.getCurrentPosition();      
       this.currentpos.lat = coordinates.coords.latitude;
       this.currentpos.lng = coordinates.coords.longitude;
-      console.log(this.lat)
+      console.log(this.currentpos.lat)
       console.log(this.lng);
+
       
 
     };
   printCurrentPosition(); 
+  
   
 
   }
@@ -72,14 +82,8 @@ export class Tab2Page {
   //       this.map.setCenter(latLng);
   //       this.loading.dismiss()
   // }
-  searchcontent:any;
-  placess:any;
-  newdata:any;
-  dataused:any;
-  latmarker:any;
-  lngmarker:any;
-  multilat:any = ["this.latmarker"];
-  multilng:any = ["this.lngmarker"];
+
+
   async listenEvent(res:any){
 
     this.searchcontent = res.detail.value;
@@ -87,6 +91,7 @@ export class Tab2Page {
       next: (data:any) => {
         this.places = data.predictions; 
         this.placess = data;
+        
       },
       error: (err:any) => {
       }
@@ -94,47 +99,61 @@ export class Tab2Page {
   }
   
   ionViewDidEnter(){
+    console.log(this.currentpos);
+    
     setTimeout(
       () => {
         this.loadMap(this.currentpos.lat,  this.currentpos.lng);
         this.loading.dismiss()
       },500
     )
-    const dataget = this.route.snapshot.queryParamMap.get('data');
+    
+      
+      
+    
+  }
+  multimarker:any;
+  ionViewWillEnter(){
+    const  dataget = this.route.snapshot.queryParamMap.get('data')
     if(dataget === null){
       this.newdata = "No Data";
     }
     else{
       this.newdata = dataget;
-      console.log(this.newdata);
-      this.dataused = JSON.parse(this.newdata)
+      const dataobj = JSON.parse(this.newdata);
+      this.dataused = dataobj;
       console.log(this.dataused);
-      
-      this.goong.getlatlngbyid(this.apikeymap,this.dataused).subscribe({
-        next: (data:any) => {
-          console.log(data);
-          console.log(data.result.geometry.location.lat);
-          console.log(data.result.geometry.location.lng);
-          this.latmarker = data.result.geometry.location.lat;
-          this.lngmarker = data.result.geometry.location.lng;
-
-          
-          
+      this.multimarker = [
+        {
+          lat:this.dataused.lat,
+          lng:this.dataused.lng
         },
-        error: (err:any) => {
-          console.log(err);
-        }
-      })
-      
+      ]
+
       
     }
+    this.goong.getcurrentposition(this.apikey,this.currentpos.lat,this.currentpos.lng).subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.placesnow = res.results[0].formatted_address;
+        console.log(this.placesnow);
+              
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
   }
-  
   
   place:any;
   searchitems:any;
-
-  loadMap(lat:any,lng:any){  
+  content_maps =[
+    {
+      name:"Minh",
+      phone:"0912345678",
+    }
+  ]
+ async loadMap(lat:any,lng:any){  
 
     const latLng = new google.maps.LatLng(this.lat,this.lng);
     console.log(this.lat,this.lng);
@@ -147,7 +166,6 @@ export class Tab2Page {
       zoom:15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
-
     this.map = new google.maps.Map(document.getElementById('map') as HTMLElement, mapOptions);
     const marker = new google.maps.Marker({
       position:{
@@ -157,10 +175,17 @@ export class Tab2Page {
       map: this.map,
       draggable: true,
       title:"Vị trí của bạn",
+      clickable:true,
       
     })
-    for(let i=0;i<this.multilat.length;i++){
-      const latLng = new google.maps.LatLng(this.multilat[i],this.multilng[i]);
+    const infoWindow = new google.maps.InfoWindow({
+      content: `<b>Tên: ${this.content_maps[0].name}</b><br><p>số điện thoại: ${this.content_maps[0].phone}</p><p>Vị trí hiện tại: ${this.placesnow}</p>`
+    });
+    marker.addListener("click", () => {
+    infoWindow.open(map, marker);
+    });
+    for(let i=0;i<this.multimarker.length;i++){
+      const latLng = new google.maps.LatLng(this.multimarker[i].lat,this.multimarker[i].lng);
       const marker = new google.maps.Marker({
         position: latLng,
         map: this.map,
@@ -168,6 +193,12 @@ export class Tab2Page {
         
 
       })
+      const infoWindow = new google.maps.InfoWindow({
+        content: `<b>Tên: ${this.content_maps[0].name}</b><br><p>số điện thoại: ${this.content_maps[0].phone}</p><p>Vị trí hiện tại: ${this.placesnow}</p>`
+      });
+      marker.addListener("click", () => {
+      infoWindow.open(map, marker);
+      });
     }
     google.maps.event.addListener(this.map, 'dragend', (event: any) => {
       const center = this.map.getCenter();

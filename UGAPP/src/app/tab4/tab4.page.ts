@@ -33,6 +33,9 @@ export class Tab4Page implements OnInit {
       
     }
   }
+  move_add_member(){
+    this.router.navigate(['../tabs/tab4/add-member']);
+  }
 
 
 }
