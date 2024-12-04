@@ -25,7 +25,7 @@
     <div class="content">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Cảnh Báo Thời Tiết</ion-card-title>
+          <ion-card-title>Cảnh Báo Thiên Tai</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
@@ -45,41 +45,6 @@
 
             <p>Mực nước biển: <b style="color: black">{{sea_level}}m</b></p>
           </div>
-        </ion-card-content>
-      </ion-card>
-    </div>
-  </div>
-  <div class="WARNING-Natural-Disaster">
-    <div class="content">
-      <ion-card id="color-wn">
-        <ion-card-header>
-          <ion-card-title>Cảnh Báo Thiên Tai</ion-card-title>
-        </ion-card-header>
-
-        <ion-card-content>
-            <div class="color-warning">
-                <div  style="width:150px;height:150px;"></div>
-            </div>
-            <div class="attention">
-                <div class="alert-wn">
-                    <div style="width:10px;height:10px;background-color:rgb(255, 255, 255);"></div>
-                    <p class="text-color" >Bình thường</p>
-                </div>
-                <div class="alert-wn">
-                    <div style="width:10px;height:10px;background-color:rgb(225, 255, 0);"></div>
-                    <p class="text-color">Khá Nguy Hiểm</p>
-                </div>
-                <div class="alert-wn">
-                    <div style="width:10px;height:10px;background-color:rgb(255, 0, 0);"></div>
-                    <p class="text-color">Nguy hiểm</p>
-                </div>
-                <div class="alert-wn">
-                    <div style="width:10px;height:10px;background-color:rgb(162, 0, 255);"></div>
-                    <p class="text-color">Thiên Tai</p>
-                </div>
-
-
-                </div>
         </ion-card-content>
       </ion-card>
     </div>
@@ -93,21 +58,26 @@
         </ion-card-header>
 
         <ion-card-content>
-          <div class="country">
+          <div class="country" >
             <p class="mainct">
               Tên Khu Vực: <b style="color: black">{{namecountry}}</b>
             </p>
           </div>
-          <div class="content-child">
+          <div class="content-child" *ngIf="currentMonthReport">
             <p>
-              Thời tiết Hôm nay: <b style="color: black">{{description}}</b>
+              Thời gian: <b style="color: black">{{currentMonthReport.month}}</b>
             </p>
-            <div class="temp">
-              <p>Nhiệt độ: <b style="color: black">{{temp}}°C</b></p>
-              <p>Độ ẩm: <b style="color: black">{{humidity}}pH</b></p>
+            <div class="temp" *ngFor="let disease of currentMonthReport.diseases">
+              <p>Loại bệnh: <b style="color: black">{{disease.name}}</b></p>
+              <p>Tiêu đề: <b style="color: black">{{disease.description}}</b></p>
+                        <p>Giải pháp phòng chống: <b style="color: black">
+              <ul>
+                <li *ngFor="let solution of disease.solutions"><b>{{solution}}</b></li>
+              </ul>
+            </b></p>
             </div>
 
-            <p>Mực nước biển: <b style="color: black">{{sea_level}}m</b></p>
+
           </div>
         </ion-card-content>
       </ion-card>

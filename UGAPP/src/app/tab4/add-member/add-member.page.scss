@@ -5,16 +5,27 @@
     box-shadow: none;
 }
 ion-header{
+    padding: 10px 10px !important;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #d33333;
     .add_member{
         display: flex;
         justify-content: flex-end;
         ion-icon{
             width: 50px;
             height: 50px;
-            color: #ef4136;
+            color: #fff;
             cursor: pointer;
         }
+    }
+    .backbtn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 50px;
+        color: #fff;
     }
 }
 ion-item{
@@ -22,4 +33,10 @@ ion-item{
 }
 ion-label{
     padding:0 0 0 10px;
+}
+.content{
+    p{
+        padding: 0 0 12px 0;
+        font-size: 20px;
+    }
 }

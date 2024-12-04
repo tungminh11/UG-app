@@ -8,6 +8,7 @@ import { GoongService } from '../@app-core/http/goong';
 import {NgZone } from '@angular/core'
 import { map } from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
+import { SocketService } from '../@app-core/http/socket';
 declare var google: any;
 @Component({
   selector: 'app-tab2',
@@ -25,8 +26,8 @@ export class Tab2Page {
   lat:any;
   lng:any;
   currentposition:any = '';
-  apikey ='moh7iGN6X9muXFV9wcXkwFSi5xj7CeSJYzwBM98Q';
-  apikeymap = 'moh7iGN6X9muXFV9wcXkwFSi5xj7CeSJYzwBM98Q';
+  apikey ='mfFQoTbrNMiUyi5xL5ljfl68MmUbQIAFnWH0NgyX';
+  apikeymap = 'mfFQoTbrNMiUyi5xL5ljfl68MmUbQIAFnWH0NgyX';
   places:any;
   currentpos:any = {
     lat:0,
@@ -40,20 +41,44 @@ export class Tab2Page {
     private loadingCtrl: LoadingController,
     private goong: GoongService,
     private zone: NgZone,
-    private route: ActivatedRoute, private router: Router
+    private route: ActivatedRoute, private router: Router,
+    private socket: SocketService
 
 
   ) {}
+  public fullname:any
+  public phone:any
+  public latsub:any
+  public lonsub:any
+  possub:any
+
   ngOnInit(){
-    
+    const tokenget:any = localStorage.getItem('authToken')
+    localStorage.setItem('authToken',tokenget)
     const printCurrentPosition = async () => {
       const coordinates = await Geolocation.getCurrentPosition();      
       this.currentpos.lat = coordinates.coords.latitude;
       this.currentpos.lng = coordinates.coords.longitude;
       console.log(this.currentpos.lat)
       console.log(this.lng);
+      this.socket.connect(tokenget);//gắn token vào đi e
+      this.socket.subscribeToGroup()      
+      console.log();
+      this.route.queryParams.subscribe(params => {
+        console.log('Dữ liệu từ Tab1:', params);
+        console.log(params['fullname']);
+        this.fullname = params['fullname']
+        this.phone = params['phone']
+        this.latsub = params['lat']
+        this.lonsub = params['lon']
+        console.log(this.fullname);
+        console.log(this.phone);
 
+        
+        
+      });
       
+
 
     };
   printCurrentPosition(); 
@@ -112,6 +137,7 @@ export class Tab2Page {
       
     
   }
+  markersub:any
   multimarker:any;
   ionViewWillEnter(){
     const  dataget = this.route.snapshot.queryParamMap.get('data')
@@ -143,6 +169,39 @@ export class Tab2Page {
         console.log(err);
       }
     })
+    this.goong.getcurrentposition(this.apikey,this.latsub,this.lonsub).subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.possub = res.results[0].formatted_address;
+        console.log(this.possub);
+        
+      }
+    })
+    this.markersub = new google.maps.Marker({
+      position:{
+        lat: this.latsub,
+        lng: this.lonsub
+      },
+      map: this.map,
+      draggable: true,
+      title:"Vị trí của bạn",
+      clickable:true,
+      
+    })
+    
+
+    const infoWindow = new google.maps.InfoWindow({
+      content: `<b>Tên: ${this.fullname}</b><br><p>số điện thoại: ${this.phone}</p><p>Vị trí hiện tại: ${this.possub}</p>`
+    });
+    this.markersub.addListener("click", () => {
+    infoWindow.open(map, this.markersub);
+    });
+    
+    
+
+
+
+    
   }
   
   place:any;
@@ -153,7 +212,7 @@ export class Tab2Page {
       phone:"0912345678",
     }
   ]
- async loadMap(lat:any,lng:any){  
+  loadMap(lat:any,lng:any){  
 
     const latLng = new google.maps.LatLng(this.lat,this.lng);
     console.log(this.lat,this.lng);
@@ -184,22 +243,25 @@ export class Tab2Page {
     marker.addListener("click", () => {
     infoWindow.open(map, marker);
     });
-    for(let i=0;i<this.multimarker.length;i++){
-      const latLng = new google.maps.LatLng(this.multimarker[i].lat,this.multimarker[i].lng);
-      const marker = new google.maps.Marker({
-        position: latLng,
+    setTimeout(()=> {
+      console.log(this.multimarker);
+
+    },5000)
+    
+      const latLng2 = new google.maps.LatLng(this.latsub,this.lonsub);
+      const markersub = new google.maps.Marker({
+        position: latLng2,
         map: this.map,
         draggable: false,
         
 
       })
-      const infoWindow = new google.maps.InfoWindow({
-        content: `<b>Tên: ${this.content_maps[0].name}</b><br><p>số điện thoại: ${this.content_maps[0].phone}</p><p>Vị trí hiện tại: ${this.placesnow}</p>`
+      const infoWindow2 = new google.maps.InfoWindow({
+        content: `<b>Tên: ${this.fullname}</b><br><p>số điện thoại: ${this.phone}</p><p>Vị trí hiện tại: ${this.placesnow}</p>`
       });
-      marker.addListener("click", () => {
-      infoWindow.open(map, marker);
+      markersub.addListener("click", () => {
+      infoWindow2.open(map, markersub);
       });
-    }
     google.maps.event.addListener(this.map, 'dragend', (event: any) => {
       const center = this.map.getCenter();
       this.lat = center.lat();

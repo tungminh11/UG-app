@@ -21,11 +21,14 @@ export class RegisterPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.forminfo.value);
+    
   }
   forminfo = new FormGroup({
     phone:new FormControl(""),
     password:new FormControl(""),
-    full_name: new FormControl("")
+    fullname: new FormControl(""),
+    role:new FormControl("USER")
   })
   backtologin(){
     this.router.navigate(['/login']);

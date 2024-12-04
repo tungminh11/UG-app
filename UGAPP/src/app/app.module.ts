@@ -6,13 +6,14 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { provideHttpClient } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(),
      AppRoutingModule,
      ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },provideHttpClient()],
+  providers: [Camera,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy},provideHttpClient(),HTTP],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
